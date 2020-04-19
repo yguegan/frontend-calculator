@@ -5,8 +5,13 @@
   "main": "gulpfile.js",
   "dependencies": {},
   "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "del": "^5.1.0",
     "gulp": "^4.0.2",
-    "gulp-sass": "^4.0.2"
+    "gulp-concat": "^2.6.1",
+    "gulp-connect-php": "^1.0.3",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify-es": "^2.0.0"
   },
   "scripts": {
     "test": "test"

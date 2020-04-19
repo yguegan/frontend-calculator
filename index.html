@@ -4,20 +4,20 @@
         <meta charset="UTF-8">
         <title>Simple calculator V1.0</title>
         <link rel="stylesheet" href="dist/styles/styles.css">
-        <script type="text/javascript" src="scripts/index.js"></script>
+        <script type="text/javascript" src="dist/scripts/all.js"></script>
     </head>
 
     <body>
         <div>
             <header>
-                <p class="summary-calc">Details of the operation</p>
-                <h2 class="result-calc" aria-label="Result">Result</h2>
+                <p class="summary-calc">0</p>
+                <h2 class="result-calc" aria-label="Result">0</h2>
             </header>
 
             <section>
                 <p class="control-panel">
                     <button class="btn btn-primary" aria-label="Reset" onclick="calculatorCtrl.resetCalculation()">AC</button>
-                    <button class="btn btn-lg btn-primary" onclick="calculatorCtrl.saveToCsvFile()">SAVE</button>
+                    <button class="btn btn-lg btn-primary" aria-label="Save on CSV" onclick="calculatorCtrl.saveToCsvFile()">SAVE</button>
                     <button class="btn btn-warning" aria-label="Divided by" onclick="calculatorCtrl.setOperationToTrigger(this, calculatorCtrl.dividedBy)">&divide;</button>
                 </p>
                 <p class="control-panel">
