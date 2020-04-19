@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>Simple calculator V1.0</title>
         <link rel="stylesheet" href="dist/styles/styles.css">
+        <script type="text/javascript" src="scripts/index.js"></script>
     </head>
 
     <body>
@@ -17,31 +18,31 @@
                 <p class="control-panel">
                     <button class="btn btn-primary" aria-label="Reset">AC</button>
                     <button class="btn btn-lg btn-primary">SAVE</button>
-                    <button class="btn btn-warning" aria-label="Divided by">&divide;</button>
+                    <button class="btn btn-warning" aria-label="Divided by" onclick="calculatorCtrl.addToTheOperation('/')">&divide;</button>
                 </p>
                 <p class="control-panel">
-                    <button class="btn btn-secondary">.</button>
-                    <button class="btn btn-secondary">0</button>
+                    <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation('.')">.</button>
+                    <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation(0)">0</button>
                     <button class="btn btn-secondary">&nbsp;</button>
-                    <button class="btn btn-warning" aria-label="Multipled by">&times;</button>
+                    <button class="btn btn-warning" aria-label="Multipled by" onclick="calculatorCtrl.addToTheOperation('*')">&times;</button>
                 </p>
                 <p class="control-panel">
-                    <button class="btn btn-secondary">1</button>
-                    <button class="btn btn-secondary">2</button>
-                    <button class="btn btn-secondary">3</button>
-                    <button class="btn btn-warning" aria-label="Substracted by">-</button>
+                    <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation(1)">1</button>
+                    <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation(2)">2</button>
+                    <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation(3)">3</button>
+                    <button class="btn btn-warning" aria-label="Substracted by" onclick="calculatorCtrl.addToTheOperation('-')">-</button>
                 </p>
                 <p class="control-panel">
-                    <button class="btn btn-secondary">4</button>
-                    <button class="btn btn-secondary">5</button>
-                    <button class="btn btn-secondary">6</button>
-                    <button class="btn btn-warning" aria-label="Added by">+</button>
+                    <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation(4)">4</button>
+                    <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation(5)">5</button>
+                    <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation(6)">6</button>
+                    <button class="btn btn-warning" aria-label="Added by" onclick="calculatorCtrl.addToTheOperation('+')">+</button>
                 </p>
                 <p class="control-panel">
-                    <button class="btn btn-secondary">7</button>
-                    <button class="btn btn-secondary">8</button>
-                    <button class="btn btn-secondary">9</button>
-                    <button class="btn btn-warning" aria-label="Equals">=</button>
+                    <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation(7)">7</button>
+                    <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation(8)">8</button>
+                    <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation(9)">9</button>
+                    <button class="btn btn-warning" aria-label="Equals" onclick="calculatorCtrl.computeResult()">=</button>
                 </p>
             </section>
         </div>
