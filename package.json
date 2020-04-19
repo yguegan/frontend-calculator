@@ -1,0 +1,16 @@
+{
+  "name": "frontend-calculator",
+  "version": "1.0.0",
+  "description": "Basic calculator",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^4.0.2"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,81 @@
+$primary-text-color: #FFF;
+$primary-font-size: 2.8rem;
+
+$secondary-text-color: #AAA;
+$secondary-font-size: 1.2rem;
+
+$btn-primary-background-color: #F55;
+$btn-secondary-background-color: #F99;
+$btn-warning-background-color: #f9cd95;
+
+$btn-font-size: 1.6rem;
+$btn-min-width: 60px;
+$btn-lg-min-width: $btn-min-width * 2;
+$btn-border-color: #888;
+
+$header-background-color: #000;
+
+body {
+  color: $primary-text-color;
+
+  header {
+    background-color: $header-background-color;
+    display: flex;
+    flex-direction: column;
+    opacity: 70%;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    padding: 25px;
+
+    .summary-calc {
+      color: $secondary-text-color;
+      margin: 0px;
+      font-size: $secondary-font-size;
+    }
+
+    .result-calc {
+      margin: 5px 0px;
+      font-size: $primary-font-size;
+    }
+  }
+
+  section {
+    .control-panel {
+      display: flex;
+      flex-direction: row;
+      margin: 0px;
+    }
+  }
+}
+
+.btn {
+  font-size: $btn-font-size;
+  border-left: none;
+  border-right: none;
+  border-radius: 0rem;
+  color: $primary-text-color;
+  flex-grow: 1;
+  padding: 15px;
+  margin: 0px;
+  border-color: $btn-border-color;
+  border-width: 1px 0px 0px 0px;
+  min-width: 60px;
+}
+
+.btn-lg {
+  min-width: $btn-lg-min-width;
+  flex-grow: 2;
+}
+
+.btn-primary {
+  background-color: $btn-primary-background-color;
+};
+
+.btn-secondary {
+  background-color: $btn-secondary-background-color;
+}
+
+.btn-warning {
+  background-color: $btn-warning-background-color;
+}
