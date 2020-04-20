@@ -15,10 +15,49 @@ class CalculatorModel {
         this.currentOperation = "0";
         this.result = 0;
         this.csvOperations = [];
+        this.ipAddress = "";
+        this.initCsvOperations();
+        this.determineIpAddress()
     }
 
     getOperationToString() {
         return this.currentOperation + this.result;
+    }
+
+    determineIpAddress() {
+        window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+            var pc = new RTCPeerConnection({iceServers:[]}), noop = function(){};      
+            pc.createDataChannel('');
+            pc.createOffer(pc.setLocalDescription.bind(pc), noop)
+            pc.onicecandidate = (ice) => {
+            if (ice && ice.candidate && ice.candidate.candidate) {
+                let ip = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];  
+                pc.onicecandidate = noop;
+                this.ipAddress = ip;
+            }
+        };
+    }
+
+    initCsvOperations() {
+        let xhttp = new XMLHttpRequest();
+        let scope = this;
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                buildExistingHistory(this.responseText);
+            }
+          };
+          xhttp.open("GET", "operationHistoric.csv", true);
+          xhttp.send();
+
+        function buildExistingHistory(data) {
+            var operations = data.split(/\r\n|\n/);
+    
+            for (var operationIndex=0; operationIndex<operations.length; operationIndex++) {
+                let operationValues = operations[operationIndex].split(','); 
+                let csvOperation = new CalculatorCSVModel(operationValues[0],operationValues[1],operationValues[2]);
+                scope.csvOperations.push(csvOperation);
+            }
+        }
     }
 };
 
@@ -45,7 +84,6 @@ class CalculatorCtrl {
         this.calculatorModel.init();
         this.operationsToTrigger = null;
         this.currentOperand = "0";
-        this.readExistingCSVFile();
     }
 
     addToTheOperation(value) {
@@ -89,7 +127,7 @@ class CalculatorCtrl {
         if(Number(valueTwo) !== 0) {
             return Number(valueOne) / Number(valueTwo)
         }
-        return 0.0;
+        return "NaN";
     }
 
     computeResult() {
@@ -111,7 +149,7 @@ class CalculatorCtrl {
 
     saveToCsvFile() {
         let currentDate = new Date();
-        this.calculatorModel.csvOperations.push(new CalculatorCSVModel(this.calculatorModel.getOperationToString(), "192.168.1.1", currentDate));
+        this.calculatorModel.csvOperations.push(new CalculatorCSVModel(this.calculatorModel.getOperationToString(), this.calculatorModel.ipAddress, currentDate));
         
         let csvContent = "";
         this.calculatorModel.csvOperations.forEach(function(rowArray) {
@@ -126,28 +164,6 @@ class CalculatorCtrl {
         downloadLink.style.display = "none";
         document.body.appendChild(downloadLink);
         downloadLink.click();
-    }
-
-    readExistingCSVFile() {
-        let xhttp = new XMLHttpRequest();
-        let scope = this;
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                buildExistingHistory(this.responseText);
-            }
-          };
-          xhttp.open("GET", "operationHistoric.csv", true);
-          xhttp.send();
-
-        function buildExistingHistory(data) {
-            var operations = data.split(/\r\n|\n/);
-    
-            for (var operationIndex=0; operationIndex<operations.length; operationIndex++) {
-                let operationValues = operations[operationIndex].split(','); 
-                let csvOperation = new CalculatorCSVModel(operationValues[0],operationValues[1],operationValues[2]);
-                scope.calculatorModel.csvOperations.push(csvOperation);
-            }
-        }
     }
 };
 

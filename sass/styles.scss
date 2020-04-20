@@ -9,8 +9,8 @@ $btn-secondary-background-color: #F99;
 $btn-warning-background-color: #f9cd95;
 
 $btn-font-size: 1.6rem;
-$btn-min-width: 60px;
-$btn-lg-min-width: $btn-min-width * 2;
+$btn-width: 60px;
+$btn-lg-width: $btn-width * 2;
 $btn-border-color: #888;
 
 $header-background-color: #000;
@@ -64,11 +64,11 @@ body {
   margin: 0px;
   border-color: $btn-border-color;
   border-width: 1px 0px 0px 0px;
-  width: $btn-min-width;
+  width: $btn-width;
 }
 
 .btn-lg {
-  width: $btn-lg-min-width;
+  width: $btn-lg-width;
   flex-grow: 2;
 }
 
