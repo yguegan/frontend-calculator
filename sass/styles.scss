@@ -18,6 +18,10 @@ $header-background-color: #000;
 body {
   color: $primary-text-color;
 
+  .container {
+    max-width: 320px;
+  }
+
   header {
     background-color: $header-background-color;
     display: flex;
@@ -60,11 +64,11 @@ body {
   margin: 0px;
   border-color: $btn-border-color;
   border-width: 1px 0px 0px 0px;
-  min-width: 60px;
+  width: $btn-min-width;
 }
 
 .btn-lg {
-  min-width: $btn-lg-min-width;
+  width: $btn-lg-min-width;
   flex-grow: 2;
 }
 
