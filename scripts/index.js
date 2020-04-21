@@ -27,13 +27,23 @@ class CalculatorModel {
     determineIpAddress() {
         window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
             var pc = new RTCPeerConnection({iceServers:[]}), noop = function(){};      
-            pc.createDataChannel('');
+            if(pc.createDataChannel !== undefined) {
+                pc.createDataChannel('');
+            }
+            else {
+                this.ipAddress = "unknown";
+            }
             pc.createOffer(pc.setLocalDescription.bind(pc), noop)
             pc.onicecandidate = (ice) => {
             if (ice && ice.candidate && ice.candidate.candidate) {
-                let ip = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];  
+                let extractedIps = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate);  
                 pc.onicecandidate = noop;
-                this.ipAddress = ip;
+                if(extractedIps !== null && extractedIps.length > 1) {
+                    this.ipAddress = extractedIps[1];
+                }
+                else {
+                    this.ipAddress = "localhost";
+                }
             }
         };
     }
