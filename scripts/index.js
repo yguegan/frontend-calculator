@@ -3,17 +3,15 @@
 class CalculatorView {
 
     updateView(calculatorModel) {
-        document.getElementsByClassName("summary-calc")[0].innerHTML = calculatorModel.currentOperation;
+        document.getElementsByClassName("summary-calc")[0].innerHTML = calculatorModel.currentOperation.replace(/\*/g, '×').replace(/\//g, '÷');
         document.getElementsByClassName("result-calc")[0].innerHTML = calculatorModel.result;
     }
 };
 
 class CalculatorModel {
     init() {
-        this.operandOne = "0";
-        this.operandTwo = "0";
-        this.currentOperation = "0";
         this.result = 0;
+        this.currentOperation = "";
         this.csvOperations = [];
         this.ipAddress = "";
         this.initCsvOperations();
@@ -92,63 +90,26 @@ class CalculatorCtrl {
 
     init() {
         this.calculatorModel.init();
-        this.operationsToTrigger = null;
-        this.currentOperand = "0";
     }
 
-    addToTheOperation(value) {
-        this.currentOperand += value;
-        if(this.calculatorModel.currentOperation === "0") {
-            this.calculatorModel.currentOperation = value;
-        }
-        else {
-            this.calculatorModel.currentOperation += value;
+    addOperatorToOperation(value) {
+        let newCurrentOperation = this.calculatorModel.currentOperation + value;
+        if (/^(([0-9]{1,})\.{0,1}([0-9]{0,})){1,}([+\-\*/]{1}(([0-9]{1,})\.{0,1}([0-9]{0,}))){0,}[+\-\*/]{1}$/.test(newCurrentOperation)) {
+            this.calculatorModel.currentOperation = newCurrentOperation;
         }
         this.calculatorView.updateView(this.calculatorModel);
     }
 
-    resetCurrentOperand() {
-        this.currentOperand = ""
-    }
-
-    setOperationToTrigger(element, operation) {
-        if(!isNaN(this.currentOperand)) {
-            this.operationsToTrigger = operation;
-            this.calculatorModel.operandOne = this.currentOperand;
-            this.calculatorModel.currentOperation += " " + element.innerText + " ";
-            this.resetCurrentOperand();
-            this.calculatorView.updateView(this.calculatorModel);
-        };
-    }
-
-    add(valueOne, valueTwo) {
-        return Number(valueOne) + Number(valueTwo)
-    }
-
-    substract(valueOne, valueTwo) {
-        return Number(valueOne) - Number(valueTwo)
-    }
-
-    multipleBy(valueOne, valueTwo) {
-        return Number(valueOne) * Number(valueTwo)
-    }
-
-    dividedBy(valueOne, valueTwo) {
-        if(Number(valueTwo) !== 0) {
-            return Number(valueOne) / Number(valueTwo)
+    addToTheOperation(value) {
+        let newCurrentOperation = this.calculatorModel.currentOperation + value;
+        if(/^(([0-9]{1,})\.{0,1}([0-9]{0,})){1,}([+\-\*/]{1}(([0-9]{1,})\.{0,1}([0-9]{0,}))){0,}$/.test(newCurrentOperation)) {
+            this.calculatorModel.currentOperation = newCurrentOperation;
         }
-        return "NaN";
+        this.calculatorView.updateView(this.calculatorModel);
     }
 
     computeResult() {
-        this.calculatorModel.currentOperation += " = ";
-        if(this.operationsToTrigger != null && !isNaN(this.currentOperand)) {
-            if(this.currentOperand !== "") {
-                this.calculatorModel.operandTwo = this.currentOperand;
-            }
-            this.calculatorModel.result = this.operationsToTrigger(this.calculatorModel.operandOne, this.calculatorModel.operandTwo);
-            this.resetCurrentOperand();
-        };
+        this.calculatorModel.result = eval(this.calculatorModel.currentOperation).toFixed(2);
         this.calculatorView.updateView(this.calculatorModel);
     }
 

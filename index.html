@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title>Simple calculator V1.0</title>
         <link rel="stylesheet" href="dist/styles/styles.css">
-        <script type="text/javascript" src="dist/scripts/all.js"></script>
+        <script type="text/javascript" src="scripts/index.js"></script>
     </head>
 
     <body>
@@ -18,25 +18,25 @@
                 <p class="control-panel">
                     <button class="btn btn-primary" aria-label="Reset" onclick="calculatorCtrl.resetCalculation()">AC</button>
                     <button class="btn btn-lg btn-primary" aria-label="Save on CSV" onclick="calculatorCtrl.saveToCsvFile()">SAVE</button>
-                    <button class="btn btn-warning" aria-label="Divided by" onclick="calculatorCtrl.setOperationToTrigger(this, calculatorCtrl.dividedBy)">&divide;</button>
+                    <button class="btn btn-warning" aria-label="Divided by" onclick="calculatorCtrl.addOperatorToOperation('/')">&divide;</button>
                 </p>
                 <p class="control-panel">
                     <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation('.')">.</button>
                     <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation('0')">0</button>
                     <button class="btn btn-secondary">&nbsp;</button>
-                    <button class="btn btn-warning" aria-label="Multipled by" onclick="calculatorCtrl.setOperationToTrigger(this, calculatorCtrl.multipleBy)">&times;</button>
+                    <button class="btn btn-warning" aria-label="Multipled by" onclick="calculatorCtrl.addOperatorToOperation('*')">&times;</button>
                 </p>
                 <p class="control-panel">
                     <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation('1')">1</button>
                     <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation('2')">2</button>
                     <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation('3')">3</button>
-                    <button class="btn btn-warning" aria-label="Substracted by" onclick="calculatorCtrl.setOperationToTrigger(this, calculatorCtrl.substract)">-</button>
+                    <button class="btn btn-warning" aria-label="Substracted by" onclick="calculatorCtrl.addOperatorToOperation('-')">-</button>
                 </p>
                 <p class="control-panel">
                     <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation('4')">4</button>
                     <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation('5')">5</button>
                     <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation('6')">6</button>
-                    <button class="btn btn-warning" aria-label="Added by" onclick="calculatorCtrl.setOperationToTrigger(this, calculatorCtrl.add)">+</button>
+                    <button class="btn btn-warning" aria-label="Added by" onclick="calculatorCtrl.addOperatorToOperation('+')">+</button>
                 </p>
                 <p class="control-panel">
                     <button class="btn btn-secondary" onclick="calculatorCtrl.addToTheOperation('7')">7</button>
