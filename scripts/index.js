@@ -4,13 +4,19 @@ class CalculatorView {
 
     updateView(calculatorModel) {
         document.getElementsByClassName("summary-calc")[0].innerHTML = calculatorModel.currentOperation.replace(/\*/g, '×').replace(/\//g, '÷');
-        document.getElementsByClassName("result-calc")[0].innerHTML = calculatorModel.result;
+        if(calculatorModel.result) {
+            document.getElementsByClassName("summary-calc")[0].innerHTML = document.getElementsByClassName("summary-calc")[0].innerHTML + " = "
+            document.getElementsByClassName("result-calc")[0].innerHTML = calculatorModel.result;
+        }
+        else {
+            document.getElementsByClassName("result-calc")[0].innerHTML = 0;
+        }
     }
 };
 
 class CalculatorModel {
     init() {
-        this.result = 0;
+        this.result = null;
         this.currentOperation = "";
         this.csvOperations = [];
         this.ipAddress = "";
